@@ -36,11 +36,9 @@ docker build -t dalongrong/lapis-1.7.0:metrics  -f Dockerfile-base-metrics .
 
 ```diff
 
-server {
-    listen ${{PORT}};
-    lua_code_cache ${{CODE_CACHE}};
-+   vhost_traffic_status_zone;
-
+http {
+  include mime.types;
++  vhost_traffic_status_zone;
 
 + location /status {
 +            vhost_traffic_status_display;
