@@ -1,0 +1,5 @@
+FROM openresty/openresty:alpine-fat
+RUN apk add openssl-dev
+WORKDIR /web
+ENV PATH=$PATH:/usr/local/openresty/luajit/bin
+RUN /usr/local/openresty/luajit/bin/luarocks install lapis
