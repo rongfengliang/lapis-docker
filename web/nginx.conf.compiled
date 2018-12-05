@@ -1,0 +1,36 @@
+env LAPIS_ENVIRONMENT=development;
+worker_processes 1;
+error_log stderr notice;
+daemon off;
+pid logs/nginx.pid;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include mime.types;
+
+  server {
+    listen 8080;
+    lua_code_cache off;
+    # vhost_traffic_status_zone;
+    location / {
+      default_type text/html;
+      content_by_lua '
+        require("lapis").serve("app")
+      ';
+    }
+    location /status {
+         #  vhost_traffic_status_display;
+         #  vhost_traffic_status_display_format html;
+    }
+    location /static/ {
+      alias static/;
+    }
+
+    location /favicon.ico {
+      alias static/favicon.ico;
+    }
+  }
+}

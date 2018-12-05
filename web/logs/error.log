@@ -1,0 +1,4 @@
+2018/12/05 12:41:35 [alert] 14#14: lua_code_cache is off; this will hurt performance in /web/nginx.conf.compiled:16
+2018/12/05 12:53:20 [alert] 14#14: lua_code_cache is off; this will hurt performance in /web/nginx.conf.compiled:16
+2018/12/05 12:53:20 [emerg] 14#14: unknown directive "vhost_traffic_status_zone" in /web/nginx.conf.compiled:17
+2018/12/05 12:54:04 [alert] 15#15: lua_code_cache is off; this will hurt performance in /web/nginx.conf.compiled:16

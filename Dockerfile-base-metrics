@@ -1,0 +1,4 @@
+FROM dalongrong/openresty-nginx-module-vts:fat
+RUN apk add openssl-dev
+WORKDIR /web
+RUN /usr/local/openresty/luajit/bin/luarocks install lapis

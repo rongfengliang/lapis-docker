@@ -23,3 +23,33 @@ docker-compose up -d
 ```code
 open http://localhost:8080
 ```
+
+## with metric monitor docker image
+
+* build base image
+
+```code
+docker build -t dalongrong/lapis-1.7.0:metrics  -f Dockerfile-base-metrics .
+```
+
+* metrics config(nginx conf)
+
+```diff
+
+server {
+    listen ${{PORT}};
+    lua_code_cache ${{CODE_CACHE}};
++   vhost_traffic_status_zone;
+
+
++ location /status {
++            vhost_traffic_status_display;
++            vhost_traffic_status_display_format html;
++    }
+```
+
+* metric watch
+
+```code
+open http://localhost:8080/status/format/prometheus
+```
