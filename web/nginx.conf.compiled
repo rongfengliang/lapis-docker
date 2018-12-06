@@ -10,20 +10,22 @@ events {
 
 http {
   include mime.types;
-
+  vhost_traffic_status_zone;
   server {
     listen 8080;
     lua_code_cache off;
-    # vhost_traffic_status_zone;
+    vhost_traffic_status_filter_by_set_key $uri uris::$server_name;
+    vhost_traffic_status_filter_by_host on;
     location / {
+      vhost_traffic_status_bypass_limit on;
       default_type text/html;
       content_by_lua '
         require("lapis").serve("app")
       ';
     }
     location /status {
-         #  vhost_traffic_status_display;
-         #  vhost_traffic_status_display_format html;
+        vhost_traffic_status_display;
+        vhost_traffic_status_display_format html;
     }
     location /static/ {
       alias static/;
