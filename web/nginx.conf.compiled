@@ -23,6 +23,12 @@ http {
         require("lapis").serve("app")
       ';
     }
+    location /ip {
+      default_type text/plain;
+      content_by_lua_block {
+        ngx.say("ip is :"..ngx.var.remote_addr)
+      }
+    }
     location /status {
         vhost_traffic_status_display;
         vhost_traffic_status_display_format html;
